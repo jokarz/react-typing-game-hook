@@ -1,0 +1,80 @@
+{
+  "name": "react-typing-game-hook",
+  "version": "1.0.0",
+  "description": "Easily create typing game functionality (10fastestfinger, monkeytype, keybr, etc) with this react hook that handles the typing logic",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "author": "Peng Chong",
+  "keywords": [
+    "typing test",
+    "typing game",
+    "typing practice",
+    "typing challenge",
+    "typing speed",
+    "react hook",
+    "react",
+    "use hook",
+    "hook"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ],
+    "moduleDirectories": [
+      "<rootDir>/node_modules",
+      "node_modules"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "singleQuote": true,
+    "semi": true
+  },
+  "peerDependencies": {
+    "react": ">= 16.9.0",
+    "react-dom": ">= 16.9.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^5.2.1",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@types/jest": "^26.0.16",
+    "@types/react": "^17.0.0",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.2",
+    "prettier": "^2.2.1",
+    "react-test-renderer": "^17.0.1",
+    "rollup": "^2.34.0",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "rollup-plugin-uglify": "^6.0.4",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,css,md}": "prettier --write"
+  }
+}
