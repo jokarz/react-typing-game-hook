@@ -260,7 +260,7 @@ const reducer: Reducer<TypingStateType, ActionItemType> = (state, action) => {
  * @param {boolean} [options.pauseOnError] Stay on the current index when the inputted character is wrong, defaults to `false`
  * @returns Returns the state and the actions available for the typing hook
  */
-const useTypingTest = (
+const useTypingGame = (
   text: string,
   options: Partial<TypingOptionsType> = {}
 ): { states: TypingStateType; actions: TypingActionType } => {
@@ -315,4 +315,4 @@ const useTypingTest = (
   };
 };
 
-export default useTypingTest;
+export default useTypingGame;
