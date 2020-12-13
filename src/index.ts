@@ -32,11 +32,11 @@ interface TypingOptionsType {
 }
 
 /**
- * Properties of the typing test hook.
+ * Properties of the typing game hook.
  */
 interface TypingStateType extends TypingOptionsType {
   /**
-   * The inputted string to be tested.
+   * The inputted string to be used.
    */
   chars: string;
   /**
@@ -44,7 +44,7 @@ interface TypingStateType extends TypingOptionsType {
    */
   charsState: CharStateType[];
   /**
-   * Total character of the string to be tested.
+   * Length of the string used.
    */
   length: number;
   /**
@@ -64,45 +64,45 @@ interface TypingStateType extends TypingOptionsType {
    */
   errorChar: number;
   /**
-   * Represent the current state of the typing test.
+   * Represent the current state.
    * `0` typing haven't started, `1` typing started, `2` typing ended.
    */
   phase: 0 | 1 | 2;
   /**
-   * Time in milliseconds when the typing test started
+   * Time in milliseconds when the typing started
    */
   startTime: number | null;
   /**
-   * Time in milliseconds when the typing test ended
+   * Time in milliseconds when the typing ended
    */
   endTime: number | null;
 }
 
 /**
- * Methods of the typing test hook.
+ * Methods of the typing game hook.
  */
 type TypingActionType = {
   /**
-   * Reset the typing test.
+   * Reset the typing sequence
    */
   resetTyping: () => void;
   /**
-   * Ends the typing test but not reset it.
+   * Ends the typing sequence but not reset it.
    */
   endTyping: () => void;
   /**
-   * Insert a character into the current typing test.
+   * Insert a character into the current typing sequence.
    * @param {string | null} char A character to be inserted.
    * If falsy or no argument is supplied, skip the current character.
    */
   insertTyping: (char?: string | null) => void;
   /**
-   * Delete a character from the current typing test.
+   * Delete a character from the current typing sequence.
    * @param {boolean} [deleteWord] If `true`, deletes the whole of the current word. Defaults to `false`.
    */
   deleteTyping: (deleteWord?: boolean) => void;
   /**
-   * Set the current index manually
+   * Set the current index manually.
    * @param {number} num Allows from -1 to length - 1 of the text, numbers that falls outside of the range will return a false
    */
   setCurrIndex: (num: number) => boolean;
@@ -253,9 +253,9 @@ const reducer: Reducer<TypingStateType, ActionItemType> = (state, action) => {
 };
 
 /**
- * React hook to create typing test.
- * @param {string} text A string of words to be used for the typing test.
- * @param {Object} [options] Addition options to customize the typing test
+ * React hook to create typing game/practice/test.
+ * @param {string} text A string of words to be used for the typing sequence.
+ * @param {Object} [options] Addition options to customize the functionality of the typing sequence.
  * @param {boolean} [options.skipCurrentWordOnSpace] Move on to the next word when space is inputted, defaults to `true`
  * @param {boolean} [options.pauseOnError] Stay on the current index when the inputted character is wrong, defaults to `false`
  * @returns Returns the state and the actions available for the typing hook

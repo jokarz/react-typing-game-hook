@@ -5,6 +5,14 @@
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "author": "Peng Chong",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jokarz/react-typing-game-hook.git"
+  },
+  "homepage": "https://github.com/jokarz/react-typing-game-hook",
+  "bugs": {
+    "url": "https://github.com/jokarz/react-typing-game-hook/issues"
+  },
   "keywords": [
     "typing test",
     "typing game",

@@ -6,6 +6,10 @@ Easily create typing games functionalty (10fastestfinger, monkeytype, keybr, etc
 
 This hook manages the states that goes on when users type in a typing game (correct characters, error characters, where the user typed till, etc) and all you need to do is to capture the inputs from the user!
 
+# Demos
+
+[Simple Demo](https://codesandbox.io/s/wonderful-rgb-wdvxt)
+
 <!-- # Demo here -->
 
 # Getting Started
@@ -18,7 +22,52 @@ npm add react-typing-game-hook
 
 ## Using it
 
-To be updated
+Here's a simple example of it (live [here](https://codesandbox.io/s/romantic-andras-uguy2))
+
+```jsx
+import React from 'react';
+// import it
+import useTypingGame from 'react-typing-game-hook';
+
+const TypingGameComponent = () => {
+  // Call the hook
+  const {
+    states: { chars, charsState },
+    actions: { insertTyping, resetTyping, deleteTyping },
+  } = useTypingGame('Click on me and start typing away!');
+
+  // Capture and display!
+  return (
+    <h1
+      onKeyDown={e => {
+        const key = e.key;
+        if (key === 'Escape') {
+          resetTyping();
+        } else if (key === 'Backspace') {
+          deleteTyping(false);
+        } else if (key.length === 1) {
+          insertTyping(key);
+        }
+        e.preventDefault();
+      }}
+      tabIndex={0}
+    >
+      {chars.split('').map((char, index) => {
+        let state = charsState[index];
+        let color = state === 0 ? 'black' : state === 1 ? 'green' : 'red';
+        return (
+          <span key={char + index} style={{ color }}>
+            {char}
+          </span>
+        );
+      })}
+    </h1>
+  );
+};
+export default TypingGameComponent;
+```
+
+Have a look at the demos on codesandbox above as well as the hooks details below to find out more!
 
 <!-- ```jsx
 import React from 'react';
@@ -67,11 +116,13 @@ const TypingTest = () => {
 };
 ``` -->
 
+# Hook Details
+
 ## Structure
 
-```tsx
+```jsx
 const {
-  state: {
+  states: {
     startTime,
     endTime,
     chars,
@@ -83,7 +134,7 @@ const {
     errorChar,
     phase,
   },
-  action: { resetTyping, endTyping, insertTyping, deleteTyping, setCurrIndex },
+  actions: { resetTyping, endTyping, insertTyping, deleteTyping, setCurrIndex },
 } = useTypingGame(text, {
   skipCurrentWordOnSpace: true,
   pauseOnError: false,
