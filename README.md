@@ -10,6 +10,10 @@ This hook manages the states that goes on when users type in a typing game (corr
 
 [Simple Demo](https://codesandbox.io/s/wonderful-rgb-wdvxt)
 
+[Typing on Input Demo](https://codesandbox.io/s/pensive-star-58xy6)
+
+[Typing on the text Demo](https://codesandbox.io/s/elastic-swirles-20914)
+
 <!-- # Demo here -->
 
 # Getting Started
@@ -153,7 +157,7 @@ const {
 | Name            | Functionalty                                                                                                                                                                                                                                                                                                                                                                  | Data Type  |                 Initial value                 |
 | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------: | :-------------------------------------------: |
 | **startTime**   | Time in milliseconds (since the Unix Epoch) when the typing started.                                                                                                                                                                                                                                                                                                          |  `number`  | Prior to when the typing starts, it is `null` |
-| **endTIme**     | Time in milliseconds(since the Unix Epoch) when the typing test ended.                                                                                                                                                                                                                                                                                                        |  `number`  | Prior to when the typing ended, it is `null`  |
+| **endTime**     | Time in milliseconds(since the Unix Epoch) when the typing test ended.                                                                                                                                                                                                                                                                                                        |  `number`  | Prior to when the typing ended, it is `null`  |
 | **chars**       | The inputted text to be used for typing.                                                                                                                                                                                                                                                                                                                                      |  `string`  |                       -                       |
 | **length**      | The lengh of the inputted text                                                                                                                                                                                                                                                                                                                                                |  `number`  |      Length of the inputted text `chars`      |
 | **charsState**  | Array of each character's state of the inputted text. Each item represents the corresponding chararacter of the text inputted. <br>`0` - represents incomplete where the user had yet to reach/enter this character <br>`1` - represents correct where the user had entered the right character <br>`2` - represents incorrect where the user had entered the wrong character | `number[]` |     Array length of `chars` filled with 0     |
