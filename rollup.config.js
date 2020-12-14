@@ -1,4 +1,4 @@
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 
@@ -13,6 +13,6 @@ export default {
       strict: false,
     },
   ],
-  plugins: [typescript(), uglify()],
+  plugins: [typescript(), terser()],
   external: ['react', 'react-dom'],
 };
