@@ -83,7 +83,13 @@ interface TypingStateType extends TypingOptionsType {
  */
 type TypingActionType = {
   /**
-   * Reset the typing sequence
+   * Duration in milliseconds since the typing started.
+   * 0 if the typing has yet to start.
+   * When the typing ended, the duration will be equivalent to endTime - startTime.
+   */
+  getDuration: () => number;
+  /**
+   * Reset the typing sequence.
    */
   resetTyping: () => void;
   /**
@@ -103,7 +109,7 @@ type TypingActionType = {
   deleteTyping: (deleteWord?: boolean) => void;
   /**
    * Set the current index manually.
-   * @param {number} num Allows from -1 to length - 1 of the text, numbers that falls outside of the range will return a false
+   * @param {number} num Allows from -1 to length - 1 of the text, numbers that falls outside of the range will return a false.
    */
   setCurrIndex: (num: number) => boolean;
 };
@@ -287,6 +293,23 @@ const useTypingGame = (
   return {
     states,
     actions: {
+      getDuration: () => {
+        switch (states.phase) {
+          case 0: {
+            return 0;
+          }
+          case 1: {
+            return states.startTime
+              ? new Date().getTime() - states.startTime
+              : 0;
+          }
+          case 2: {
+            return states.startTime && states.endTime
+              ? states.endTime - states.startTime
+              : 0;
+          }
+        }
+      },
       resetTyping: () => dispatch({ type: ActionType.RESET }),
       endTyping: () => dispatch({ type: ActionType.END }),
       insertTyping: (letter = null) => {

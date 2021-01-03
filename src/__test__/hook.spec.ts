@@ -1,6 +1,9 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import useTypingTest from '../index';
 
+const sleep = (duration: number) =>
+  new Promise(res => setTimeout(res, duration));
+
 describe('useTypingPractice hook tests', () => {
   const test = 'The quick brown fox jumps over the lazy dog';
   const initialState = {
@@ -24,6 +27,8 @@ describe('useTypingPractice hook tests', () => {
     skipCurrentWordOnSpace: true,
     pauseOnError: false,
   };
+
+  Object.freeze(initialState);
 
   it('should render initial states properly', () => {
     const { result } = renderHook(() => useTypingTest(test));
@@ -206,6 +211,28 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.currIndex).toBe(42);
     expect(result.current.states.startTime).not.toBe(null);
     expect(result.current.states.endTime).not.toBe(null);
+  });
+  it('can get duration', async () => {
+    const { result } = renderHook(() => useTypingTest(test));
+    let res = 0;
+    act(() => {
+      res = result.current.actions.getDuration();
+    });
+    expect(res).toBe(0);
+    await act(async () => {
+      result.current.actions.insertTyping('T');
+      await sleep(200);
+      res = result.current.actions.getDuration();
+    });
+    expect(res).toBeGreaterThan(0);
+    let res2 = 0;
+    await act(async () => {
+      result.current.actions.insertTyping('H');
+      await sleep(200);
+      result.current.actions.endTyping();
+      res2 = result.current.actions.getDuration();
+    });
+    expect(res2).toBeGreaterThan(res);
   });
 
   it('allows for setting of current index', () => {
