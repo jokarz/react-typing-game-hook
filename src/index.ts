@@ -1,4 +1,11 @@
 import { Reducer, useReducer } from 'react';
+import {
+  RESET,
+  SETCURRENTINDEX,
+  END,
+  TYPINGINSERT,
+  TYPINGDELETE,
+} from './Actions';
 
 enum ActionType {
   RESET = 'RESET',
@@ -8,7 +15,7 @@ enum ActionType {
   SETCURRENTINDEX = 'SET/CURRENTINDEX',
 }
 
-type ActionItemType =
+export type ActionItemType =
   | { type: ActionType.RESET; payload?: undefined }
   | { type: ActionType.END; payload?: undefined }
   | { type: ActionType.TYPINGDELETE; payload: boolean }
@@ -20,6 +27,7 @@ type ActionItemType =
  * `0` represents incomplete, `1` represents correct and, `2` represents incorrect.
  */
 type CharStateType = 0 | 1 | 2;
+type typingErrorTypes = 'everytime' | 'once';
 interface TypingOptionsType {
   /**
    * Move on to the next word when space is inputted, defaults to `true`.
@@ -29,12 +37,16 @@ interface TypingOptionsType {
    * Stay on the current index when the inputted character is wrong, defaults to `false`.
    */
   pauseOnError: boolean;
+  /**
+   * Choose to count errors everytime a mistake is made or only once for each mistake made, defaults to `everytime`.
+   */
+  countErrors: typingErrorTypes;
 }
 
 /**
  * Properties of the typing game hook.
  */
-interface TypingStateType extends TypingOptionsType {
+export interface TypingStateType extends TypingOptionsType {
   /**
    * The inputted string to be used.
    */
@@ -115,143 +127,17 @@ type TypingActionType = {
 };
 
 const reducer: Reducer<TypingStateType, ActionItemType> = (state, action) => {
-  let {
-    startTime,
-    endTime,
-    chars,
-    charsState,
-    length,
-    currIndex,
-    correctChar,
-    errorChar,
-    phase,
-    skipCurrentWordOnSpace,
-    pauseOnError,
-  } = state;
-  let payload = action.payload ?? null;
   switch (action.type) {
-    case ActionType.SETCURRENTINDEX: {
-      if (
-        payload &&
-        typeof payload === 'number' &&
-        payload >= -1 &&
-        payload < length
-      ) {
-        return { ...state, currIndex: payload, currChar: chars[payload] };
-      } else {
-        return state;
-      }
-    }
-    case ActionType.RESET: {
-      return {
-        ...state,
-        startTime: null,
-        endTime: null,
-        charsState: new Array(chars.length).fill(0),
-        currIndex: -1,
-        currChar: '',
-        correctChar: 0,
-        errorChar: 0,
-        phase: 0,
-      };
-    }
-    case ActionType.END: {
-      return { ...state, phase: 2, endTime: new Date().getTime() };
-    }
-    case ActionType.TYPINGINSERT: {
-      let letter = action.payload ?? null;
-      let newStartTime = startTime;
-      let newEndTime = endTime;
-      if (phase === 2) {
-        return state;
-      }
-
-      if (phase === 0) {
-        phase = 1;
-        newStartTime = new Date().getTime();
-      }
-
-      let newCharsState = [...charsState];
-      if (
-        letter === ' ' &&
-        chars[currIndex + 1] !== ' ' &&
-        skipCurrentWordOnSpace
-      ) {
-        let newIndex = chars.indexOf(letter, currIndex);
-        currIndex = newIndex === -1 ? length - 1 : newIndex;
-      } else {
-        if (letter !== null) {
-          if (chars[currIndex + 1] !== letter) {
-            newCharsState[currIndex + 1] = 2;
-            errorChar += 1;
-            if (!pauseOnError) {
-              currIndex += 1;
-            }
-          } else {
-            newCharsState[currIndex + 1] = 1;
-            correctChar += 1;
-            currIndex += 1;
-          }
-        } else {
-          currIndex += 1;
-        }
-      }
-
-      if (currIndex >= length - 1) {
-        newEndTime = new Date().getTime();
-        phase = 2;
-      }
-      let currChar = currIndex >= 0 ? chars[currIndex] : '';
-      return {
-        ...state,
-        charsState: newCharsState,
-        errorChar,
-        correctChar,
-        currIndex,
-        currChar,
-        phase,
-        startTime: newStartTime,
-        endTime: newEndTime,
-      };
-    }
-    case ActionType.TYPINGDELETE: {
-      if (phase !== 1 || currIndex === -1) {
-        return state;
-      }
-      let newCharsState = [...charsState];
-      if (payload) {
-        let newIndex = chars.lastIndexOf(' ', currIndex);
-        newIndex = newIndex === -1 ? 0 : newIndex + 1;
-        for (let i = currIndex; i >= newIndex; i--) {
-          if (newCharsState[i] === 1) {
-            correctChar -= 1;
-          } else if (newCharsState[i] === 2) {
-            errorChar -= 1;
-          }
-          newCharsState[i] = 0;
-        }
-        currIndex = newIndex;
-      } else {
-        if (newCharsState[currIndex] === 1) {
-          correctChar -= 1;
-        } else if (newCharsState[currIndex] === 2) {
-          errorChar -= 1;
-        }
-        newCharsState[currIndex] = 0;
-      }
-      if (currIndex !== -1) {
-        currIndex -= 1;
-      }
-      let currChar = currIndex >= 0 ? chars[currIndex] : '';
-      return {
-        ...state,
-        currIndex,
-        currChar,
-        charsState: newCharsState,
-        correctChar,
-        errorChar,
-      };
-    }
+    case ActionType.SETCURRENTINDEX:
+      return SETCURRENTINDEX(state, action);
+    case ActionType.RESET:
+      return RESET(state);
+    case ActionType.END:
+      return END(state);
+    case ActionType.TYPINGINSERT:
+      return TYPINGINSERT(state, action);
+    case ActionType.TYPINGDELETE:
+      return TYPINGDELETE(state, action);
     default: {
       return state;
     }
@@ -264,6 +150,7 @@ const reducer: Reducer<TypingStateType, ActionItemType> = (state, action) => {
  * @param {Object} [options] Addition options to customize the functionality of the typing sequence.
  * @param {boolean} [options.skipCurrentWordOnSpace] Move on to the next word when space is inputted, defaults to `true`
  * @param {boolean} [options.pauseOnError] Stay on the current index when the inputted character is wrong, defaults to `false`
+ * @param {typingErrorTypes} [options.countErrors]
  * @returns Returns the state and the actions available for the typing hook
  */
 const useTypingGame = (
@@ -283,6 +170,7 @@ const useTypingGame = (
     phase: 0,
     skipCurrentWordOnSpace: true,
     pauseOnError: false,
+    countErrors: 'everytime',
     ...options,
   };
 

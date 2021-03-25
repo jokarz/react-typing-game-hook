@@ -142,15 +142,17 @@ const {
 } = useTypingGame(text, {
   skipCurrentWordOnSpace: true,
   pauseOnError: false,
+  countErrors: 'everytime',
 });
 ```
 
 ## Parameters
 
-| Name                       | Functionalty                                                                                                                      | Default value |
-| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
-| **skipCurrentWordOnSpace** | When `true`, moves on to the _next word_ when space is inputted. Otherwise, it moves on to the _next character_ instead           |    `true`     |
-| **pauseOnError**           | When `true`, stays on the _same character_ until it is correctly inputted. Otherwise, it moves on to the _next character_ instead |    `false`    |
+| Name                       | Functionalty                                                                                                                                                                         | Default value |
+| :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: |
+| **skipCurrentWordOnSpace** | When `true`, moves on to the _next word_ when space is inputted. Otherwise, it moves on to the _next character_ instead                                                              |    `true`     |
+| **pauseOnError**           | When `true`, stays on the _same character_ until it is correctly inputted. Otherwise, it moves on to the _next character_ instead                                                    |    `false`    |
+| **countErrors**            | When value is `'everytime'`, count errors anytime a mistake is made. When value is `'once'`, count errors only once for each mistake made at the position where the letter is typed. | `'everytime'` |
 
 ## States
 
