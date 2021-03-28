@@ -1,4 +1,6 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jokarz/react-typing-game-hook/ci) ![npm](https://img.shields.io/npm/v/react-typing-game-hook?color=informational&label=npm%20package&logo=npm)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jokarz/react-typing-game-hook/ci)](#)
+
+[![npm](https://img.shields.io/npm/v/react-typing-game-hook?color=informational&label=npm%20package&logo=npm)](https://www.npmjs.com/package/react-typing-game-hook) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-typing-game-hook)](#)
 
 # React Typing Game Hook
 
@@ -140,7 +142,14 @@ const {
     errorChar,
     phase,
   },
-  actions: { resetTyping, endTyping, insertTyping, deleteTyping, setCurrIndex },
+  actions: {
+    resetTyping,
+    endTyping,
+    insertTyping,
+    deleteTyping,
+    setCurrIndex,
+    getDuration,
+  },
 } = useTypingGame(text, {
   skipCurrentWordOnSpace: true,
   pauseOnError: false,

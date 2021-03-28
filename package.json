@@ -86,7 +86,7 @@
   "lint-staged": {
     "*.{js,ts,css,md}": [
       "prettier --write",
-      "jest --ci -b"
+      "jest -b --ci --passWithNoTests"
     ]
   }
 }
