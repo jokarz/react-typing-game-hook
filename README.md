@@ -1,3 +1,5 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jokarz/react-typing-game-hook/ci) ![npm](https://img.shields.io/npm/v/react-typing-game-hook?color=informational&label=npm%20package&logo=npm)
+
 # React Typing Game Hook
 
 Easily create typing games functionalty (10fastestfinger, monkeytype, keybr, etc) with this react hook that handles the typing logic

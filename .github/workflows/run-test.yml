@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
-name: Run Test
+name: ci
 on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn add react && yarn
-    - name: Run tests
-      run: yarn test
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn add react && yarn
+      - name: Run tests
+        run: yarn jest

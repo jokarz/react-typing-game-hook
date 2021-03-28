@@ -22,6 +22,7 @@ describe('useTypingPractice hook tests', () => {
     currIndex: -1,
     currChar: '',
     correctChar: 0,
+    countErrors: 'everytime',
     errorChar: 0,
     phase: 0,
     skipCurrentWordOnSpace: true,
@@ -81,8 +82,36 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.startTime).not.toBe(null);
   });
 
-  it('should update after deleting a character', () => {
-    const { result } = renderHook(() => useTypingTest(test));
+  it('should update correctly after deleting a character when countErrors = "everytime"', () => {
+    const { result } = renderHook(() =>
+      useTypingTest(test, { countErrors: 'everytime' })
+    );
+    act(() => {
+      result.current.actions.insertTyping('Q');
+      result.current.actions.deleteTyping();
+    });
+    expect(result.current.states.charsState).toEqual(
+      // prettier-ignore
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0
+      ]
+    );
+    expect(result.current.states.correctChar).toBe(0);
+    expect(result.current.states.errorChar).toBe(1);
+    expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.phase).toBe(1);
+    expect(result.current.states.currIndex).toBe(-1);
+    expect(result.current.states.startTime).not.toBe(null);
+  });
+
+  it('should update correctly after deleting a character when countErrors = "once"', () => {
+    const { result } = renderHook(() =>
+      useTypingTest(test, { countErrors: 'once' })
+    );
     act(() => {
       result.current.actions.insertTyping('Q');
       result.current.actions.deleteTyping();
@@ -105,8 +134,38 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.startTime).not.toBe(null);
   });
 
-  it('should update after deleting a word', () => {
-    const { result } = renderHook(() => useTypingTest(test));
+  it('should update correctly after deleting a word when countErrors = "everytime"', () => {
+    const { result } = renderHook(() =>
+      useTypingTest(test, { countErrors: 'everytime' })
+    );
+    act(() => {
+      result.current.actions.insertTyping('T');
+      result.current.actions.insertTyping('H');
+      result.current.actions.insertTyping('W');
+      result.current.actions.deleteTyping(true);
+    });
+    expect(result.current.states.charsState).toEqual(
+      // prettier-ignore
+      [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0
+      ]
+    );
+    expect(result.current.states.correctChar).toBe(0);
+    expect(result.current.states.errorChar).toBe(2);
+    expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.phase).toBe(1);
+    expect(result.current.states.currIndex).toBe(-1);
+    expect(result.current.states.startTime).not.toBe(null);
+  });
+
+  it('should update correctly after deleting a word when countErrors = "once"', () => {
+    const { result } = renderHook(() =>
+      useTypingTest(test, { countErrors: 'once' })
+    );
     act(() => {
       result.current.actions.insertTyping('T');
       result.current.actions.insertTyping('H');

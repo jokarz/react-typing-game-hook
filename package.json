@@ -14,20 +14,22 @@
     "url": "https://github.com/jokarz/react-typing-game-hook/issues"
   },
   "keywords": [
-    "typing test",
+    "custom hook",
+    "hook",
+    "react",
+    "react hook",
+    "typing challenge",
+    "typing function",
     "typing game",
     "typing practice",
-    "typing challenge",
     "typing speed",
-    "react hook",
-    "react",
-    "use hook",
-    "hook"
+    "typing test",
+    "use hook"
   ],
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "jest": {
     "transform": {
@@ -82,6 +84,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,css,md}": "prettier --write"
+    "*.{js,ts,css,md}": [
+      "prettier --write",
+      "jest --ci -b"
+    ]
   }
 }
