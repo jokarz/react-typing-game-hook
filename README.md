@@ -1,6 +1,6 @@
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jokarz/react-typing-game-hook/ci)](#)
 
-[![npm](https://img.shields.io/npm/v/react-typing-game-hook?color=informational&label=npm%20package&logo=npm)](https://www.npmjs.com/package/react-typing-game-hook) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-typing-game-hook)](#)
+[![npm](https://img.shields.io/npm/v/react-typing-game-hook?label=npm%20package&logo=npm)](https://www.npmjs.com/package/react-typing-game-hook) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-typing-game-hook)](#)
 
 # React Typing Game Hook
 
