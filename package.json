@@ -15,16 +15,27 @@
   },
   "keywords": [
     "custom hook",
+    "customizable hook",
+    "easy to use",
+    "flexible hook",
     "hook",
+    "keyboard game",
+    "keyboard challenge",
+    "keyboard practice",
+    "keyboard test",
     "react",
     "react hook",
+    "simple hook",
+    "typing flexible",
     "typing challenge",
     "typing function",
     "typing game",
     "typing practice",
+    "typing simple",
     "typing speed",
     "typing test",
-    "use hook"
+    "use hook",
+    "usehook"
   ],
   "scripts": {
     "build": "rollup -c",

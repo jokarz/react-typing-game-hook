@@ -1,4 +1,5 @@
-import { TypingStateType, ActionItemType } from '../index';
+import { ActionItemType } from './index';
+import { TypingStateType } from '../index';
 
 export default (
   state: TypingStateType,
