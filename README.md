@@ -117,7 +117,7 @@ import { PhaseType, CharStateType } from 'react-typing-game-hook';
 
 PhaseType {
   NotStarted = 0,
-  Start = 1,
+  Started = 1,
   Ended = 2,
 }
 
