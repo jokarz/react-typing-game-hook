@@ -8,7 +8,7 @@ Easily create typing games functionalty (10fastestfinger, monkeytype, keybr, etc
 
 # About
 
-This hook manages the states that goes on when users type in a typing game (correct characters, error characters, where the user typed till, etc) and all you need to do is to capture the inputs from the user!
+This hook takes care of the states and the little details that goes on when users type in a typing game/test/challenge! Your part is to just capture the inputs from the user!
 
 # Demos
 
