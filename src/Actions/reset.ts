@@ -12,6 +12,7 @@ export default (state: TypingStateType): TypingStateType => {
     currChar: '',
     correctChar: 0,
     errorChar: 0,
+    keystrokes: 0,
     phase: 0,
   };
 };

@@ -24,6 +24,7 @@ describe('useTypingPractice hook tests', () => {
     correctChar: 0,
     countErrors: 'everytime',
     errorChar: 0,
+    keystrokes: 0,
     phase: 0,
     skipCurrentWordOnSpace: true,
     pauseOnError: false,
@@ -54,6 +55,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(1);
     expect(result.current.states.errorChar).toBe(0);
     expect(result.current.states.currChar).toBe('T');
+    expect(result.current.states.keystrokes).toBe(1);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(0);
     expect(result.current.states.startTime).not.toBe(null);
@@ -77,6 +79,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(1);
     expect(result.current.states.currChar).toBe('T');
+    expect(result.current.states.keystrokes).toBe(1);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(0);
     expect(result.current.states.startTime).not.toBe(null);
@@ -103,6 +106,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(1);
     expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.keystrokes).toBe(1);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(-1);
     expect(result.current.states.startTime).not.toBe(null);
@@ -129,6 +133,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(0);
     expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.keystrokes).toBe(1);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(-1);
     expect(result.current.states.startTime).not.toBe(null);
@@ -157,6 +162,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(2);
     expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.keystrokes).toBe(3);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(-1);
     expect(result.current.states.startTime).not.toBe(null);
@@ -185,6 +191,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(0);
     expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.keystrokes).toBe(3);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(-1);
     expect(result.current.states.startTime).not.toBe(null);
@@ -210,6 +217,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(43);
     expect(result.current.states.errorChar).toBe(0);
     expect(result.current.states.currChar).toBe('g');
+    expect(result.current.states.keystrokes).toBe(43);
     expect(result.current.states.phase).toBe(2);
     expect(result.current.states.currIndex).toBe(42);
     expect(result.current.states.startTime).not.toBe(null);
@@ -240,6 +248,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).not.toBe(43);
     expect(result.current.states.errorChar).not.toBe(0);
     expect(result.current.states.currChar).toBe('g');
+    expect(result.current.states.keystrokes).toBe(43);
     expect(result.current.states.phase).toBe(2);
     expect(result.current.states.currIndex).toBe(42);
     expect(result.current.states.startTime).not.toBe(null);
@@ -266,6 +275,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(43);
     expect(result.current.states.currChar).toBe('g');
+    expect(result.current.states.keystrokes).toBe(43);
     expect(result.current.states.phase).toBe(2);
     expect(result.current.states.currIndex).toBe(42);
     expect(result.current.states.startTime).not.toBe(null);
@@ -341,6 +351,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(1);
     expect(result.current.states.errorChar).toBe(0);
     expect(result.current.states.currChar).toBe('q');
+    expect(result.current.states.keystrokes).toBe(1);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(4);
     expect(result.current.states.startTime).not.toBe(null);
@@ -368,6 +379,7 @@ describe('useTypingPractice hook tests', () => {
     expect(res.current.states.correctChar).toBe(0);
     expect(res.current.states.errorChar).toBe(2);
     expect(res.current.states.currChar).toBe('h');
+    expect(res.current.states.keystrokes).toBe(2);
     expect(res.current.states.phase).toBe(1);
     expect(res.current.states.currIndex).toBe(1);
     expect(res.current.states.startTime).not.toBe(null);
@@ -394,6 +406,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.correctChar).toBe(0);
     expect(result.current.states.errorChar).toBe(1);
     expect(result.current.states.currChar).toBe('');
+    expect(result.current.states.keystrokes).toBe(1);
     expect(result.current.states.phase).toBe(1);
     expect(result.current.states.currIndex).toBe(-1);
     expect(result.current.states.startTime).not.toBe(null);
@@ -420,6 +433,7 @@ describe('useTypingPractice hook tests', () => {
     expect(res.current.states.correctChar).toBe(0);
     expect(res.current.states.errorChar).toBe(1);
     expect(res.current.states.currChar).toBe('T');
+    expect(res.current.states.keystrokes).toBe(1);
     expect(res.current.states.phase).toBe(1);
     expect(res.current.states.currIndex).toBe(0);
     expect(res.current.states.startTime).not.toBe(null);

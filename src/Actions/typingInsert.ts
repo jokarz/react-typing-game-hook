@@ -14,6 +14,7 @@ export default (
     currIndex,
     correctChar,
     errorChar,
+    keystrokes,
     phase,
     skipCurrentWordOnSpace,
     pauseOnError,
@@ -53,6 +54,7 @@ export default (
         if (!pauseOnError) {
           currIndex += 1;
         }
+        keystrokes += 1;
       } else {
         if (
           newCharsState[currIndex + 1] === 2 &&
@@ -64,6 +66,7 @@ export default (
         newCharsState[currIndex + 1] = 1;
         correctChar += 1;
         currIndex += 1;
+        keystrokes += 1;
       }
     } else {
       currIndex += 1;
@@ -82,6 +85,7 @@ export default (
     correctChar,
     currIndex,
     currChar,
+    keystrokes,
     phase,
     startTime: newStartTime,
     endTime: newEndTime,

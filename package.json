@@ -40,7 +40,8 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "jest": {
     "transform": {
@@ -100,5 +101,9 @@
       "prettier --write",
       "jest -b --ci --passWithNoTests"
     ]
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
