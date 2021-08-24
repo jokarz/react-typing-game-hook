@@ -100,6 +100,10 @@ export interface TypingStateType extends TypingOptionsType {
    */
   errorChar: number;
   /**
+   * Number of keystrokes the user has typed.
+   */
+  keystrokes: number;
+  /**
    * Represent the current state.
    * `0` typing haven't started, `1` typing started, `2` typing ended.
    */
@@ -192,6 +196,7 @@ const useTypingGame = (
       currChar: '',
       correctChar: 0,
       errorChar: 0,
+      keystrokes: 0,
       phase: 0,
       skipCurrentWordOnSpace: true,
       pauseOnError: false,
