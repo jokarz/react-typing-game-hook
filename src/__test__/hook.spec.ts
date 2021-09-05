@@ -271,6 +271,7 @@ describe('useTypingPractice hook tests', () => {
     expect(result.current.states.startTime).not.toBe(null);
     expect(result.current.states.endTime).not.toBe(null);
   });
+
   it('can get duration', async () => {
     const { result } = renderHook(() => useTypingTest(test));
     let res = 0;
@@ -424,5 +425,55 @@ describe('useTypingPractice hook tests', () => {
     expect(res.current.states.currIndex).toBe(0);
     expect(res.current.states.startTime).not.toBe(null);
     expect(res.current.states.endTime).toBe(null);
+  });
+
+  it('should reset when text is changed', () => {
+    let testStr = test
+    let { result, rerender } = renderHook(() =>
+      useTypingTest(testStr)
+    );
+    act(() => {
+      result.current.actions.insertTyping('q');
+    });
+    expect(result.current.states.charsState).toEqual(
+      // prettier-ignore
+      [
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0
+      ]
+    );
+    expect(result.current.states.correctChar).toBe(0);
+    expect(result.current.states.errorChar).toBe(1);
+    expect(result.current.states.currChar).toBe('T');
+    expect(result.current.states.phase).toBe(1);
+    expect(result.current.states.currIndex).toBe(0);
+    expect(result.current.states.startTime).not.toBe(null);
+    expect(result.current.states.endTime).toBe(null);
+
+    testStr = "But lazy dog got up"
+    rerender();
+
+    act(() => {
+     result.current.actions.insertTyping('B');
+     result.current.actions.insertTyping('u');
+    });
+
+    expect(result.current.states.charsState).toEqual(
+      // prettier-ignore
+      [
+        1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 
+      ]
+    );
+    expect(result.current.states.correctChar).toBe(2);
+    expect(result.current.states.errorChar).toBe(0);
+    expect(result.current.states.currChar).toBe('u');
+    expect(result.current.states.phase).toBe(1);
+    expect(result.current.states.currIndex).toBe(1);
+    expect(result.current.states.startTime).not.toBe(null);
+    expect(result.current.states.endTime).toBe(null);
   });
 });

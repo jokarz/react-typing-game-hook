@@ -1,4 +1,7 @@
+import type { TypingStateType } from '../types';
+
 export enum ActionType {
+  _ONTEXTCHANGE = 'INTERNAL/ONTEXTCHANGE',
   RESET = 'RESET',
   END = 'END',
   TYPINGINSERT = 'TYPING/INSERT',
@@ -11,7 +14,8 @@ export type ActionItemType =
   | { type: ActionType.END; payload?: undefined }
   | { type: ActionType.TYPINGDELETE; payload: boolean }
   | { type: ActionType.TYPINGINSERT; payload: string | null }
-  | { type: ActionType.SETCURRENTINDEX; payload: number };
+  | { type: ActionType.SETCURRENTINDEX; payload: number }
+  | {type: ActionType._ONTEXTCHANGE; payload: TypingStateType}
 
 export { default as RESET } from './reset';
 export { default as SETCURRENTINDEX } from './setCurrentIndex';

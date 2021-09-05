@@ -1,4 +1,4 @@
-import { TypingStateType } from '../index';
+import type { TypingStateType } from '../types';
 
 export default (state: TypingStateType): TypingStateType => {
   let { chars } = state;
