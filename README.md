@@ -12,11 +12,11 @@ This hook takes care of the states and the little details that goes on when user
 
 # Demos
 
-[Simple Demo](https://codesandbox.io/s/wonderful-rgb-wdvxt)
+[Basic Demo](https://codesandbox.io/s/admiring-bash-hjjtd)
 
-[Typing on Input Demo](https://codesandbox.io/s/pensive-star-58xy6)
+[Simple typing via input box Demo](https://codesandbox.io/s/sad-parm-gtm15)
 
-[Typing on the text Demo](https://codesandbox.io/s/elastic-swirles-20914)
+[Simple typing on text Demo](https://codesandbox.io/s/epic-merkle-23s75)
 
 <!-- # Demo here -->
 
@@ -30,12 +30,12 @@ npm add react-typing-game-hook
 
 ## Usage
 
-Here's a simple example of it (live [here](https://codesandbox.io/s/romantic-andras-uguy2))
+Here's a simple example of it (live [here](https://codesandbox.io/s/wispy-frost-6pfc6))
 
 ```jsx
 import React from 'react';
 // import it
-import useTypingGame from 'react-typing-game-hook';
+import useTypingGame, { CharStateType } from 'react-typing-game-hook';
 
 const TypingGameComponent = () => {
   // Call the hook
@@ -48,21 +48,30 @@ const TypingGameComponent = () => {
   return (
     <h1
       onKeyDown={e => {
+        e.preventDefault();
         const key = e.key;
         if (key === 'Escape') {
           resetTyping();
-        } else if (key === 'Backspace') {
+          return;
+        }
+        if (key === 'Backspace') {
           deleteTyping(false);
-        } else if (key.length === 1) {
+          return;
+        }
+        if (key.length === 1) {
           insertTyping(key);
         }
-        e.preventDefault();
       }}
       tabIndex={0}
     >
       {chars.split('').map((char, index) => {
         let state = charsState[index];
-        let color = state === 0 ? 'black' : state === 1 ? 'green' : 'red';
+        let color =
+          state === CharStateType.Incomplete
+            ? 'black'
+            : state === CharStateType.Correct
+            ? 'green'
+            : 'red';
         return (
           <span key={char + index} style={{ color }}>
             {char}
@@ -75,7 +84,7 @@ const TypingGameComponent = () => {
 export default TypingGameComponent;
 ```
 
-Have a look at the demos on codesandbox above as well as the hooks details below to find out more!
+Have a look at the demos above as well as the hooks details below to find out more!
 
 # Hook Details
 
