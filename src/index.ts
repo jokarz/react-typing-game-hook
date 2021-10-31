@@ -8,7 +8,9 @@ import {
   ActionType,
   ActionItemType,
 } from './Actions';
+
 import {
+  CharStateType,
   PhaseType,
   TypingActionType,
   TypingOptionsType,
@@ -154,3 +156,11 @@ const useTypingGame = (
 };
 
 export default useTypingGame;
+
+export {
+  CharStateType,
+  PhaseType,
+  TypingActionType,
+  TypingOptionsType,
+  TypingStateType,
+};
