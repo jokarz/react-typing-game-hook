@@ -1,6 +1,6 @@
 {
   "name": "react-typing-game-hook",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Easily create typing game functionality (10fastestfinger, monkeytype, keybr, etc) with this react hook that handles the typing logic",
   "license": "Apache-2.0",
   "main": "dist/index.js",
