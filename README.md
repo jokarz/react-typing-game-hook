@@ -25,7 +25,7 @@ This hook takes care of the states and the little details that goes on when user
 ## Importing
 
 ```
-npm add react-typing-game-hook
+npm install react-typing-game-hook
 ```
 
 or
