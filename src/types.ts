@@ -1,42 +1,42 @@
 type countErrorTypes = 'everytime' | 'once';
 
+type valueof<T> = T[keyof T];
+
 /**
  * Constants for different phases.
- * @enum {number}
  */
-export enum PhaseType {
+export const PhaseType = {
   /**
    * Phase when typing has yet to start.
    */
-  NotStarted = 0,
+  NotStarted: 0,
   /**
    * Phase when typing has started.
    */
-  Started = 1,
+  Started: 1,
   /**
    * Phase when typing has ended.
    */
-  Ended = 2,
-}
+  Ended: 2,
+} as const;
 
 /**
  * Constants for different character states.
- * @enum {number}
  */
-export enum CharStateType {
+export const CharStateType = {
   /**
    * Character has yet to be determined to be correct or incorrect.
    */
-  Incomplete = 0,
+  Incomplete: 0,
   /**
    * Character is determined to be correct.
    */
-  Correct = 1,
+  Correct: 1,
   /**
    * Character is determined to be incorrect.
    */
-  Incorrect = 2,
-}
+  Incorrect: 2,
+} as const;
 
 export interface TypingOptionsType {
   /**
@@ -67,7 +67,7 @@ export interface TypingStateType extends TypingOptionsType {
    * Each item in the array represents the state of each character in the string.
    * `0` represents incomplete, `1` represents correct and, `2` represents incorrect.
    */
-  charsState: CharStateType[];
+  charsState: valueof<typeof CharStateType>[];
   /**
    * Length of the string used.
    */
@@ -92,7 +92,7 @@ export interface TypingStateType extends TypingOptionsType {
    * Represent the current state.
    * `0` typing haven't started, `1` typing started, `2` typing ended.
    */
-  phase: PhaseType;
+  phase: valueof<typeof PhaseType>;
   /**
    * Time in milliseconds when the typing started.
    */

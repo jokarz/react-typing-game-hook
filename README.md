@@ -1,4 +1,4 @@
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jokarz/react-typing-game-hook/ci)](#)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jokarz/react-typing-game-hook/run-test.yml?branch=main)](#)
 
 [![npm](https://img.shields.io/npm/v/react-typing-game-hook?label=npm%20package&logo=npm)](https://www.npmjs.com/package/react-typing-game-hook) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-typing-game-hook)](#)
 
@@ -26,6 +26,12 @@ This hook takes care of the states and the little details that goes on when user
 
 ```
 npm add react-typing-game-hook
+```
+
+or
+
+```
+yarn add react-typing-game-hook
 ```
 
 ## Usage
