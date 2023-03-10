@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install modules
-        run: yarn add react && yarn
+        run: yarn add react@17.0.2 && yarn
       - name: Run typecheck
         run: yarn typecheck
       - name: Run tests
